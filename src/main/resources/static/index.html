@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - University Management System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
+                    </svg>
+                </div>
+                <h1 class="login-title">Welcome Back</h1>
+                <p class="login-subtitle">Sign in to University Management System</p>
+            </div>
+
+            <form id="loginForm">
+                <div id="alertContainer"></div>
+
+                <div class="form-group">
+                    <label class="form-label" for="username">Username</label>
+                    <input type="text" id="username" class="form-input" placeholder="Enter your username" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    Sign In
+                </button>
+            </form>
+
+            <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center;">
+                <p style="font-size: 13px; color: var(--text-secondary);">
+                    Demo credentials:<br>
+                    <strong>Teacher:</strong> teacher / teacher123<br>
+                    <strong>Student:</strong> student / student123
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Store credentials for API calls
+        let authCredentials = '';
+
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const alertContainer = document.getElementById('alertContainer');
+
+            // Clear previous alerts
+            alertContainer.innerHTML = '';
+
+            // Create base64 credentials
+            authCredentials = btoa(username + ':' + password);
+
+            try {
+                const response = await fetch('/api/students', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Basic ' + authCredentials
+                    }
+                });
+
+                if (response.ok) {
+                    // Store credentials in session storage
+                    sessionStorage.setItem('authCredentials', authCredentials);
+                    sessionStorage.setItem('username', username);
+
+                    // Determine role based on response to teachers endpoint
+                    const teacherResponse = await fetch('/api/teachers', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Basic ' + authCredentials
+                        }
+                    });
+
+                    // Try to delete to check if teacher
+                    sessionStorage.setItem('role', 'USER');
+
+                    // Check role by trying teacher-only endpoint
+                    try {
+                        const roleCheck = await fetch('/api/departments', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': 'Basic ' + authCredentials,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({name: '__role_check__', description: 'test'})
+                        });
+                        if (roleCheck.ok || roleCheck.status === 400) {
+                            sessionStorage.setItem('role', 'TEACHER');
+                            // Delete the test record
+                            const data = await roleCheck.json();
+                            if (data.id) {
+                                await fetch('/api/departments/' + data.id, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'Authorization': 'Basic ' + authCredentials
+                                    }
+                                });
+                            }
+                        }
+                    } catch(e) {
+                        sessionStorage.setItem('role', 'STUDENT');
+                    }
+
+                    // Redirect to dashboard
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alertContainer.innerHTML = `
+                        <div class="alert alert-danger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Invalid username or password
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                alertContainer.innerHTML = `
+                    <div class="alert alert-danger">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Connection error. Please try again.
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
+

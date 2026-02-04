@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers - University Management System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <div class="sidebar-logo-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                        </svg>
+                    </div>
+                    <span class="sidebar-logo-text">UniManager</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="dashboard.html" class="nav-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        Dashboard
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Management</div>
+                    <a href="students.html" class="nav-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                        Students
+                    </a>
+                    <a href="teachers.html" class="nav-item active">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                        Teachers
+                    </a>
+                    <a href="courses.html" class="nav-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        Courses
+                    </a>
+                    <a href="departments.html" class="nav-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                        Departments
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Account</div>
+                    <a href="#" class="nav-item" onclick="logout()">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                        Logout
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-search">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input type="text" placeholder="Search teachers..." id="searchInput" onkeyup="filterTeachers()">
+                </div>
+
+                <div class="header-actions">
+                    <div class="header-user">
+                        <div class="user-avatar" id="userAvatar">T</div>
+                        <div class="user-info">
+                            <div class="user-name" id="userName">Teacher</div>
+                            <div class="user-role" id="userRole">Administrator</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div id="alertContainer"></div>
+
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Teachers</h1>
+                        <p class="page-subtitle">Manage teacher records</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="openAddModal()" id="addBtn" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        Add Teacher
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Specialization</th>
+                                    <th>Department</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="teachersTableBody">
+                                <tr>
+                                    <td colspan="6" class="loading">
+                                        <div class="spinner"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal-overlay" id="teacherModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Add Teacher</h3>
+                <button class="modal-close" onclick="closeModal('teacherModal')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="teacherForm" onsubmit="saveTeacher(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="teacherId">
+
+                    <div class="form-group">
+                        <label class="form-label" for="name">Full Name *</label>
+                        <input type="text" id="name" class="form-input" placeholder="Enter full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="Enter email address">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone</label>
+                        <input type="text" id="phone" class="form-input" placeholder="Enter phone number">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="specialization">Specialization</label>
+                        <input type="text" id="specialization" class="form-input" placeholder="Enter specialization">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="departmentId">Department</label>
+                        <select id="departmentId" class="form-select">
+                            <option value="">Select Department</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('teacherModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Teacher</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Delete Teacher</h3>
+                <button class="modal-close" onclick="closeModal('deleteModal')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this teacher? This action cannot be undone.</p>
+                <input type="hidden" id="deleteTeacherId">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('deleteModal')">Cancel</button>
+                <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        let allTeachers = [];
+        let departments = [];
+
+        checkAuth();
+
+        if (isTeacher()) {
+            document.getElementById('addBtn').style.display = 'flex';
+        }
+
+        loadTeachers();
+        loadDepartments();
+
+        async function loadTeachers() {
+            try {
+                allTeachers = await apiRequest('/api/teachers');
+                renderTeachers(allTeachers);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function loadDepartments() {
+            try {
+                departments = await apiRequest('/api/departments');
+                const select = document.getElementById('departmentId');
+                select.innerHTML = '<option value="">Select Department</option>' +
+                    departments.map(d => `<option value="${d.id}">${escapeHtml(d.name)}</option>`).join('');
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function renderTeachers(teachers) {
+            const tbody = document.getElementById('teachersTableBody');
+            const teacher = isTeacher();
+
+            if (teachers.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                                </svg>
+                                <h3>No teachers found</h3>
+                                <p>Add your first teacher to get started</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = teachers.map(t => `
+                <tr>
+                    <td>${escapeHtml(t.name)}</td>
+                    <td>${escapeHtml(t.email) || '-'}</td>
+                    <td>${escapeHtml(t.phone) || '-'}</td>
+                    <td><span class="badge badge-success">${escapeHtml(t.specialization) || '-'}</span></td>
+                    <td>${t.department?.name ? escapeHtml(t.department.name) : '-'}</td>
+                    <td>
+                        <div class="table-actions">
+                            ${teacher ? `
+                            <button class="action-btn edit" title="Edit" onclick="editTeacher(${t.id})">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                            </button>
+                            <button class="action-btn delete" title="Delete" onclick="deleteTeacher(${t.id})">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                            ` : '-'}
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function filterTeachers() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allTeachers.filter(t =>
+                t.name.toLowerCase().includes(query) ||
+                (t.email && t.email.toLowerCase().includes(query)) ||
+                (t.specialization && t.specialization.toLowerCase().includes(query))
+            );
+            renderTeachers(filtered);
+        }
+
+        function openAddModal() {
+            document.getElementById('modalTitle').textContent = 'Add Teacher';
+            document.getElementById('teacherForm').reset();
+            document.getElementById('teacherId').value = '';
+            openModal('teacherModal');
+        }
+
+        function editTeacher(id) {
+            const teacher = allTeachers.find(t => t.id === id);
+            if (!teacher) return;
+
+            document.getElementById('modalTitle').textContent = 'Edit Teacher';
+            document.getElementById('teacherId').value = teacher.id;
+            document.getElementById('name').value = teacher.name;
+            document.getElementById('email').value = teacher.email || '';
+            document.getElementById('phone').value = teacher.phone || '';
+            document.getElementById('specialization').value = teacher.specialization || '';
+            document.getElementById('departmentId').value = teacher.department?.id || '';
+
+            openModal('teacherModal');
+        }
+
+        async function saveTeacher(e) {
+            e.preventDefault();
+
+            const id = document.getElementById('teacherId').value;
+            const data = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                specialization: document.getElementById('specialization').value
+            };
+
+            const deptId = document.getElementById('departmentId').value;
+            if (deptId) {
+                data.department = { id: parseInt(deptId) };
+            }
+
+            try {
+                if (id) {
+                    await apiRequest(`/api/teachers/${id}`, 'PUT', data);
+                } else {
+                    await apiRequest('/api/teachers', 'POST', data);
+                }
+                closeModal('teacherModal');
+                showAlert(document.getElementById('alertContainer'),
+                    id ? 'Teacher updated successfully' : 'Teacher added successfully', 'success');
+                loadTeachers();
+            } catch (error) {
+                showAlert(document.getElementById('alertContainer'), 'Error saving teacher');
+            }
+        }
+
+        function deleteTeacher(id) {
+            document.getElementById('deleteTeacherId').value = id;
+            openModal('deleteModal');
+        }
+
+        async function confirmDelete() {
+            const id = document.getElementById('deleteTeacherId').value;
+            try {
+                await apiRequest(`/api/teachers/${id}`, 'DELETE');
+                closeModal('deleteModal');
+                showAlert(document.getElementById('alertContainer'), 'Teacher deleted successfully', 'success');
+                loadTeachers();
+            } catch (error) {
+                showAlert(document.getElementById('alertContainer'), 'Error deleting teacher');
+            }
+        }
+    </script>
+</body>
+</html>
