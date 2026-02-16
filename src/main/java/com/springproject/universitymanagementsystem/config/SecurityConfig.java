@@ -45,6 +45,9 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/api/students/**").hasRole("TEACHER")
                 .requestMatchers(HttpMethod.POST, "/api/students/**").hasRole("TEACHER")
 
+                // Students can update their own info via /self endpoint
+                .requestMatchers(HttpMethod.PUT, "/api/students/*/self").hasAnyRole("STUDENT", "TEACHER")
+
                 // Both can read
                 .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("STUDENT", "TEACHER")
 

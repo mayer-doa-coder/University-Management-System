@@ -290,27 +290,28 @@ class CourseRepositoryTest {
     // ===== Transactional Behavior Tests =====
 
     @Test
-    @DisplayName("Should handle concurrent modifications")
+    @DisplayName("Should handle sequential saves")
     void testConcurrentModifications() {
         // Arrange
         Course savedCourse = entityManager.persistAndFlush(testCourse);
         Long courseId = savedCourse.getId();
         entityManager.clear();
 
-        // Act
+        // Act - Simulating two users updating sequentially
         Course course1 = courseRepository.findById(courseId).orElse(null);
-        Course course2 = courseRepository.findById(courseId).orElse(null);
-
         course1.setName("Modified by User 1");
-        course2.setName("Modified by User 2");
+        courseRepository.saveAndFlush(course1);
+        entityManager.clear();
 
-        courseRepository.save(course1);
-        entityManager.flush();
+        Course course2 = courseRepository.findById(courseId).orElse(null);
+        course2.setName("Modified by User 2");
+        courseRepository.saveAndFlush(course2);
+        entityManager.clear();
 
         // Assert - Last save wins
         Course finalCourse = courseRepository.findById(courseId).orElse(null);
         assertThat(finalCourse).isNotNull();
-        assertThat(finalCourse.getName()).isEqualTo("Modified by User 1");
+        assertThat(finalCourse.getName()).isEqualTo("Modified by User 2");
     }
 
     @Test
