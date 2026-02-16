@@ -44,12 +44,7 @@ jobs:
       - name: Run tests
         run: mvn test
 
-      # Step 6: Generate test coverage report (optional)
-      - name: Generate coverage report
-        run: mvn jacoco:report
-        continue-on-error: true
-
-      # Step 7: Upload test results
+      # Step 6: Upload test results
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v3
@@ -57,20 +52,11 @@ jobs:
           name: test-results
           path: target/surefire-reports/
 
-      # Step 8: Upload coverage report (optional)
-      - name: Upload coverage report
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: target/site/jacoco/
-        continue-on-error: true
-
-      # Step 9: Package the application
+      # Step 7: Package the application
       - name: Package application
         run: mvn package -DskipTests
 
-      # Step 10: Upload the packaged artifact
+      # Step 8: Upload the packaged artifact
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v3
         with:
