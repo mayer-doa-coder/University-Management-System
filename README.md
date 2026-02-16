@@ -17,7 +17,7 @@ docker-compose up -d --build
 ```
 
 ### Step 3: Wait & Access
-Wait ~30 seconds for startup, then open:
+Wait ~30 seconds for startup, tashen open:
 - **Frontend**: http://localhost:8080
 - **API**: http://localhost:8080/api
 
