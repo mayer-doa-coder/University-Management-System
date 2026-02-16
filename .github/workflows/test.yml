@@ -38,11 +38,11 @@ jobs:
 
       # Step 4: Build the project (compile without running tests)
       - name: Build with Maven
-        run: mvn clean compile -DskipTests
+        run: ./mvnw clean compile -DskipTests
 
       # Step 5: Run all tests
       - name: Run tests
-        run: mvn test
+        run: ./mvnw test
 
       # Step 6: Upload test results
       - name: Upload test results
@@ -54,7 +54,7 @@ jobs:
 
       # Step 7: Package the application
       - name: Package application
-        run: mvn package -DskipTests
+        run: ./mvnw package -DskipTests
 
       # Step 8: Upload the packaged artifact
       - name: Upload JAR artifact
@@ -81,7 +81,7 @@ jobs:
           cache: maven
 
       - name: Run Maven verify
-        run: mvn verify -DskipTests
+        run: ./mvnw verify -DskipTests
 
   # Summary job that will fail if any test fails
   test-summary:
@@ -92,10 +92,12 @@ jobs:
 
     steps:
       - name: Check test results
+        shell: bash
         run: |
-          if [ "${{ needs.build-and-test.result }}" != "success" ]; then
+          if [[ "${{ needs.build-and-test.result }}" != "success" ]]; then
             echo "Tests failed! Please fix the failing tests before merging."
             exit 1
           else
             echo "All tests passed successfully!"
           fi
+
