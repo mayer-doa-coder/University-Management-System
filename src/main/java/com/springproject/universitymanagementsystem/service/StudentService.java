@@ -2,6 +2,8 @@ package com.springproject.universitymanagementsystem.service;
 
 import com.springproject.universitymanagementsystem.entity.Student;
 import com.springproject.universitymanagementsystem.repository.StudentRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
 @Service
 public class StudentService {
 
+    private static final Logger logger = LoggerFactory.getLogger(StudentService.class);
     private final StudentRepository studentRepository;
 
     public StudentService(StudentRepository studentRepository) {
@@ -28,7 +31,11 @@ public class StudentService {
     }
 
     public Student save(Student student) {
-        return studentRepository.save(student);
+        // Added logging on testing branch - track save operations
+        logger.info("Saving student with roll number: {}", student != null ? student.getRollNumber() : "null");
+        Student savedStudent = studentRepository.save(student);
+        logger.info("Successfully saved student with ID: {}", savedStudent.getId());
+        return savedStudent;
     }
 
     // Student can update their info except roll number
