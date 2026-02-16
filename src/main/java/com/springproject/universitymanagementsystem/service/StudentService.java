@@ -28,6 +28,13 @@ public class StudentService {
     }
 
     public Student save(Student student) {
+        // Added validation on master branch - prevent null students
+        if (student == null) {
+            throw new IllegalArgumentException("Student cannot be null");
+        }
+        if (student.getRollNumber() == null || student.getRollNumber().trim().isEmpty()) {
+            throw new IllegalArgumentException("Student roll number is required");
+        }
         return studentRepository.save(student);
     }
 
